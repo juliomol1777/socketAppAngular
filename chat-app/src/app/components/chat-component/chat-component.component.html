@@ -1,0 +1,9 @@
+<div>
+    <div *ngFor="let a of documents">
+        <span>{{a.msg}}</span>
+    </div>
+    <div>
+        <input [(ngModel)]="currentDoc.msg" (change)="sendData()" placeholder="Escribe...." type="text">
+       </div> 
+</div>
+

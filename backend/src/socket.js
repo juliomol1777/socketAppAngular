@@ -1,31 +1,38 @@
+"use strict"
+const Document = require('./modelos/Document');
+
 module.exports = function (io) {
+
+    
     //socket.io
-    const documents = {};
-    io.on("connection", socket => {
-        let previousId;
-        const safeJoin = currentId => {
-          socket.leave(previousId);
-          socket.join(currentId);
-          previousId = currentId;
-        };
-      
-        socket.on("getDoc", docId => {
-          safeJoin(docId);
-          socket.emit("document", documents[docId]);
+    //io.emit es para todos, socket.emit no
+    io.on('connection', async socket => {
+      //base de datos
+      var documents = await Document.find({});
+      socket.emit('text event', documents);
+      //var documents = [];
+      /** handshake: Es el id de conexion con el dispositivo cliente */
+      const id_handshake = socket.id;
+      console.log('Nuevo dispositivo conectado: ' + id_handshake);
+      //escuchar
+      socket.on('send message', async data => {
+        console.log(data)
+        var msg = data.msg.trim();
+        var nuevoMsg = new Document({
+          msg
         });
-      
-        socket.on("addDoc", doc => {
-          documents[doc.id] = doc;
-          safeJoin(doc.id);
-          io.emit("documents", Object.keys(documents));
-          socket.emit("document", doc);
-        });
-      
-        socket.on("editDoc", doc => {
-          documents[doc.id] = doc;
-          socket.to(doc.id).emit("document", doc);
-        });
-      
-        io.emit("documents", Object.keys(documents));
+        await nuevoMsg.save();
+        console.log(nuevoMsg)
+        //documents.push(data)
+        io.sockets.emit('text event', {msg});
+        
+        //socket.broadcast.emit('text event', documents)
       });
+
+      // al dispositivo unico le emitimos un mensaje
+      //socket.emit('mensaje-coneccion', {
+        //msg: `Hola tu eres el dispositivo ${id_handshake}`
+      //});
+      //io.emit("documents", Object.keys(documents));
+    });
 }

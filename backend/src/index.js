@@ -1,24 +1,34 @@
-const e = require('express');
-const express = require('express');
-const socketIo = require('socket.io');
-const path = require('path');
+const app = require('express')();
+const server = require('http').Server(app);
 
-const app = express();
-
-//settings
-app.set('port', process.env.PORT || 3000);
-
+//const path = require('path');
+const mongoose = require('mongoose');
 //iniciar servidor
-const server = app.listen(app.get('port'), () =>{
-    console.log('server on port' , app.get('port'));
+server.listen(3000, () =>{
+    console.log('server on port 3000')
 });
+    /*server.get('port'), () =>{
+    console.log('server on port' , server.get('port'));
+});*/
 
 // archivos estaticos
-//app.use(express.static(path.join(_dirname, 'public')));
+//app.use('/public', express.static(path.resolve('public')));
 
-const io = socketIo(server);
-
+//socket
+const io = require('socket.io')(server, {
+    cors: {
+      origin: "http://localhost:4200",
+      methods: ["GET", "POST"]
+    }
+  });
 require('./socket')(io);
+
+//base de datos
+mongoose.connect('mongodb://localhost/chat-db', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true})
+    .then(db => console.log('db esta conectada'))
+    .catch(err => console.log(err));
 
 
 
