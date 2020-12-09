@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ChatComponentComponent} from './components/chat-component/chat-component.component'
+import {ChatComponent } from './components/chat/chat.component';
+import {HomeComponent } from './components/home/home.component'
 
 const routes: Routes = [
   {
     path: '',
-    component: ChatComponentComponent 
+    component: HomeComponent 
+  },
+  {
+    path: 'chat/:id',
+    component: ChatComponent 
   }
 ];
 

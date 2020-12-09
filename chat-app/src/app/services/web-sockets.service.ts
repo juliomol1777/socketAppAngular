@@ -13,15 +13,13 @@ export class WebSocketsService {
 
   socket : any;
   server = 'http://localhost:3000';
-  //currentDocument = this.socket.fromEvent<Document>('document');
-  //documents = this.socket.fromEvent<string[]>('documents');
-
+  
   constructor() { 
     this.socket = io(this.server)
   }
 
   listenEvent(eventName: string){
-    return new Observable ((subscriber) =>{
+    return new Observable<Document> ((subscriber) =>{
       this.socket.on(eventName, (data) =>{
         subscriber.next(data)
       })

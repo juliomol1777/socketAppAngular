@@ -1,0 +1,14 @@
+<div class="container">
+    <div>
+        <label>Hola <span>{{userChat.user}}</span></label>
+        <input [(ngModel)]="userChat.text" (change)="sendData()" 
+            placeholder="Escribe...." type="text">
+        <input type="submit" (submit)="sendData()">
+    </div>
+    <div *ngFor="let a of documents">
+        <p>{{a._id}}  {{a.user}} = {{a.msg}}</p>
+    </div>
+    <div *ngFor="let new of newMessage">
+        <p>{{new._id}}  {{new.user}} = {{new.msg}}</p>
+    </div>
+</div>

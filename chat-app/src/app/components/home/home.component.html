@@ -1,0 +1,9 @@
+<div>
+    <div>
+        <h1>Escribe tu nombre</h1>
+    </div>
+    <div>
+        <input type="text" [(ngModel)] = "User.name">
+    </div>
+    <a href="" [routerLink] = "['/chat', User.name]">Unirme al chat</a>
+</div>

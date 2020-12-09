@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 15px solid rgb(88, 8, 58);
+    padding: 50px;
+    margin: 10px;
+  }
+  p{
+      text-align:justify;
+      font-size: medium;
+      font-style: italic;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }

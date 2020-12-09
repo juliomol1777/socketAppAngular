@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const DocumentSchema = new Schema({
-    //nick: String,
+    user: String,
     msg: String,
     created_at: {
         type: Date,

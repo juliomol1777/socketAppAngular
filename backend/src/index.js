@@ -1,18 +1,17 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').Server(app);
 
-//const path = require('path');
+const path = require('path');
 const mongoose = require('mongoose');
+
 //iniciar servidor
 server.listen(3000, () =>{
     console.log('server on port 3000')
-});
-    /*server.get('port'), () =>{
-    console.log('server on port' , server.get('port'));
-});*/
-
+})
+    
 // archivos estaticos
-//app.use('/public', express.static(path.resolve('public')));
+app.use('/public', express.static(path.resolve('public')));
 
 //socket
 const io = require('socket.io')(server, {
@@ -24,7 +23,7 @@ const io = require('socket.io')(server, {
 require('./socket')(io);
 
 //base de datos
-mongoose.connect('mongodb://localhost/chat-db', {
+mongoose.connect('mongodb://localhost/chats-db', {
     useNewUrlParser: true,
     useUnifiedTopology: true})
     .then(db => console.log('db esta conectada'))
