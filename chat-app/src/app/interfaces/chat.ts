@@ -1,4 +1,5 @@
-export interface Document{
-    user: string,
-    msg: String
+export interface Documento{
+    id? : string;
+    user: string;
+    texto: String; 
 }

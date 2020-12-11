@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Document } from '../../interfaces/chat';
+import { Documento } from '../../interfaces/chat';
 import {ActivatedRoute} from '@angular/router';
 import {WebSocketsService} from '../../services/web-sockets.service';
 
@@ -10,9 +10,9 @@ import {WebSocketsService} from '../../services/web-sockets.service';
 })
 export class ChatComponent implements OnInit {
 
-  userChat = {
+  userChat : Documento = {
     user:'',
-    text:''
+    texto:''
   }
   newMessage = [];
   documents;
@@ -46,6 +46,6 @@ export class ChatComponent implements OnInit {
 
   sendData(){
     this.webSocketServices.emitEvent(this.eventName, this.userChat)
-    this.userChat.text = '';
+    this.userChat.texto = '';
    }
 }

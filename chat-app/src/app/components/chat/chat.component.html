@@ -1,7 +1,7 @@
 <div class="container">
     <div>
         <label>Hola <span>{{userChat.user}}</span></label>
-        <input [(ngModel)]="userChat.text" (change)="sendData()" 
+        <input [(ngModel)]="userChat.texto" (change)="sendData()" 
             placeholder="Escribe...." type="text">
         <input type="submit" (submit)="sendData()">
     </div>

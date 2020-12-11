@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {io} from 'socket.io-client/build/index';
 
 import {Observable} from 'rxjs';
+import { Documento } from '../interfaces/chat';
 
 @Injectable({
 
@@ -19,7 +20,7 @@ export class WebSocketsService {
   }
 
   listenEvent(eventName: string){
-    return new Observable<Document> ((subscriber) =>{
+    return new Observable<Documento> ((subscriber) =>{
       this.socket.on(eventName, (data) =>{
         subscriber.next(data)
       })
